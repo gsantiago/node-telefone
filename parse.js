@@ -44,15 +44,10 @@ module.exports = function (value, options = { apenasFixo: false, apenasCelular: 
         if(telefone.substring(2, 3) !== '9')
             return null; //todos os telefones celulares começam com 9
         if(telefone.substring(3, 4) === '0' || telefone.substring(3, 4) == '5')
-            return null; //não existe 90 ou 95 
+            return null; //não existe 90 ou 95
     }
     else if(telefone.length === 10 && iniciaisFixo.indexOf(telefone.substring(2, 3)) === -1)
         return null; //inicial do celular fixo
-
-    const start = telefone.length === 10 ? 2 : 3;
-    for(let n = 0; n < 10; n++)
-        if(telefone.substring(start, telefone.length) === n.toString().repeat(telefone.length - start))
-            return null; //valida se todos os dígitos são iguais, por que isso indica telefone fake inventado manualmente
 
     if (codigosDDD.indexOf(parseInt(telefone.substring(0, 2))) === -1)
         return null; //código de DDD inválido
